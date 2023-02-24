@@ -83,14 +83,19 @@ export default function Board() {
             alert("YOU WIN!");
             resetGame();
         }
+
+        setCpuTurn(!cpuTurn);
+        
+        setTimeout(cpuGame, 800); //CPU 'delay' for a more realistic game experience
     }
 
     //Cleans board and resets count:
     const resetGame = () => {
         setHumanCount(0);
+        setCpuCount(0);
         setHideShips(false);
-        for (let i = 0; i < 100; i++) {
-            document.getElementsByClassName('box-1 col-1 boxButton')[i].style.backgroundColor = '#e9e9ed';
+        for (let i = 0; i < 200; i++) {
+            document.getElementsByClassName('col-1 boxButton')[i].style.backgroundColor = '#e9e9ed';
             document.getElementById(i).style.border = 'solid';
         }
     }
@@ -121,6 +126,30 @@ export default function Board() {
 
     //CPU turn:
     const cpuGame = () => {
+            //random number to get one position for
+            let randomPosition = Math.floor(Math.random() * (100));
+            console.log(randomPosition);
+            console.log(cpuBoard);
+            if (cpuBoard[randomPosition] === 1) {
+                //IDs in cpu board start at 100, so we have to add 100 to the random number to get the position we want in cpu board
+                document.getElementById(randomPosition+100).style.backgroundColor = 'red';
+                setCpuCount(cpuCount + 1);
+                //console.log(humanCount)
+            }
+            else {
+                document.getElementById(randomPosition+100).style.backgroundColor = 'blue';
+
+            }
+
+            if (cpuCount === 18) {
+                alert("CPU WIN! TRY NEXT TIME");
+                resetGame();
+            }
+
+        
+
+
+        setCpuTurn(!cpuTurn);
 
 
 
@@ -137,7 +166,7 @@ export default function Board() {
                 <h4 className='text-center mb-3 text-white'>You start</h4>
 
                 {/* Board area for human to play: */}
-                <div className='container w-25 '>        
+                <div className='container w-25 '>
                     <div className="tableArea mx-auto">
                         <h4 className='text-center mb-3 text-white'>Human Plays Here! </h4>
                         <div className='row'>
@@ -150,16 +179,16 @@ export default function Board() {
                     </div>
                 </div>
 
-                 {/* Board area for CPU to Play */}
-                <div className='container w-25'>                  
+                {/* Board area for CPU to Play */}
+                <div className='container w-25'>
                     <div className="tableArea mx-auto">
                         <h4 className='text-center mb-3 text-white'>CPU Plays Here</h4>
                         <div className='row'>
 
                             {cpuBoard.map((singleBox, index) => {
-                                return (<button className={"box-2 col-1 boxButton"} id={index + 100} style={{ width: '10%', height: '7vh' }} key={index}>  </button>)
+                                return (<button className={"box-2 col-1 boxButton"} id={index + 100} style={{ width: '10%', height: '7vh' }} key={index}> </button>)
                             })}
-                            
+
                         </div>
                     </div>
                 </div>
