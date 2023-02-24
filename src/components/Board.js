@@ -106,7 +106,7 @@ export default function Board() {
     //When the user presses the button to reveal ships
     const showShips = () => {
         setHideShips(!hideShips);
-        //console.log(hideShips);
+
 
         if (hideShips) {
             for (let i = 0; i < 100; i++) {
@@ -132,14 +132,13 @@ export default function Board() {
 
         //random number to get one position for
         let randomPosition = Math.floor(Math.random() * (100));
-        //console.log(randomPosition);
-        //console.log(cpuBoard);
+
         if (cpuBoard[randomPosition] === 1) {
             //IDs in cpu board start at 100, so we have to add 100 to the random number to get the position we want in cpu board
             document.getElementById(randomPosition + 100).style.backgroundColor = 'red';
             setCpuCount(cpuCount + 1);
 
-            //console.log(humanCount)
+
         }
         else {
             document.getElementById(randomPosition + 100).style.backgroundColor = 'gray';
