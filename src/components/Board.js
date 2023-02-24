@@ -54,7 +54,8 @@ export default function Board() {
     let [humanCount, setHumanCount] = useState(0);
     let [cpuCount, setCpuCount] = useState(0);
 
-    //Gets human board disabled when it's CPU'S turn:
+    //Gets human board disabled when it's CPU'S turn (not implemented yet)
+//and shows a message when it's each player's turn:
     let [cpuTurn, setCpuTurn] = useState(false);
 
     //useState to change button label when you decide to show/hide ships:
