@@ -60,12 +60,19 @@ export default function Board() {
     //useState to change button label when you decide to show/hide ships:
     let [hideShips, setHideShips] = useState(false);
 
-    // adds borders to the board boxes:
+    //useEffect to show an alert inmediately if a player wins:
     useEffect(() => {
-        for (let i = 0; i < 200; i++) {
-            document.getElementsByClassName('col-1 boxButton')[i].style.border = 'solid';
+        if (humanCount === 18) {
+            alert("YOU WIN!");
+            resetGame();
         }
-    }, [])
+        else if (cpuCount === 18) {
+            alert("CPU WIN! TRY NEXT TIME");
+            resetGame();
+        }
+
+
+    }, [humanCount, cpuCount])
 
     //Function reveals background color when clicked, and add counts if there is a ship inside the box:
     function boxClick(position, value) {
@@ -82,10 +89,7 @@ export default function Board() {
 
         }
 
-        if (humanCount === 18) {
-            alert("YOU WIN!");
-            resetGame();
-        }
+
 
         setTimeout(cpuGame, 800); //CPU 'delay' for a more realistic game experience
 
@@ -106,7 +110,6 @@ export default function Board() {
     //When the user presses the button to reveal ships
     const showShips = () => {
         setHideShips(!hideShips);
-
 
         if (hideShips) {
             for (let i = 0; i < 100; i++) {
@@ -145,10 +148,7 @@ export default function Board() {
 
         }
 
-        if (cpuCount === 18) {
-            alert("CPU WIN! TRY NEXT TIME");
-            resetGame();
-        }
+
         setCpuTurn(false);
     }
 
@@ -170,7 +170,9 @@ export default function Board() {
                 {/* Headings */}
                 <h1 className='text-center my-3 text-white'>Battleship</h1>
                 <h3 className='text-center mb-3 text-white'>Are you ready? Let's go</h3>
-                {(cpuTurn ? <h4 className='text-center mb-3 text-white'>CPU's turn</h4> : <h4 className='text-center mb-3 text-white'>Your turn</h4>)}
+                {
+                    (cpuTurn ? <h4 className='text-center mb-3 text-white'>CPU's turn</h4> : <h4 className='text-center mb-3 text-white'>Your turn</h4>)
+                }
 
                 {/* Board area for human to play: */}
                 <div className='col-xl-3 mx-auto'>
@@ -178,7 +180,7 @@ export default function Board() {
                     <div className='row'>
 
                         {humanBoard.map((singleBox, index) => {
-                            return (<button className={"box-1 col-1 boxButton"} id={index} style={{ width: '10%', height: '7vh' }} onClick={() => boxClick(index, singleBox)} key={index}>  </button>)
+                            return (<Button className={"box-1 col-1 boxButton"} id={index} style={{ width: '10%', height: '7vh', border: 'solid' }} onClick={() => boxClick(index, singleBox)} key={index} />)
                         })}
 
                     </div>
@@ -192,7 +194,7 @@ export default function Board() {
                     <div className='row'>
 
                         {cpuBoard.map((singleBox, index) => {
-                            return (<button className={"box-2 col-1 boxButton"} id={index + 100} style={{ width: '10%', height: '7vh' }} key={index}> </button>)
+                            return (<Button className={"box-2 col-1 boxButton"} id={index + 100} style={{ width: '10%', height: '7vh', border: 'solid' }} key={index} />)
                         })}
                         {/* we add 100 to IDs in this board to difference them from the first board */}
                     </div>
