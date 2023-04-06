@@ -18,15 +18,11 @@ As soon as all of one player's ships have been sunk, the game ends.
 
 [Full rules here](https://www.cs.nmsu.edu/~bdu/TA/487/brules.htm)
 
---------------------------------------
-## Technologies used
-
-This game was developed mainly on ReactJS.
 
 --------------------------------------
 ## Scripts
 
-In the project directory, you have to run:
+This game was developed mainly on ReactJS, using Bootstrap 5.2 and a little bit of pure CSS for design. In order to play, you have to run (in the project directory):
 
 ### `npm start`
 
